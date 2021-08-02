@@ -1,0 +1,15 @@
+{
+  "first_name":"Bob",
+  "last_name" : "Dylan",
+  "date_of_birth" : "2021-09-21",
+  "checkin":"2021-09-19T16:37:15",
+  "checkout": "2021-09-20T16:37:15",
+  "deposit" : 0.0,
+  "address" :{
+    "line1": "23 A",
+    "city" : "Rohtak",
+    "state" : "Haryana",
+    "country" : "India",
+    "zip_code" : 12345
+  }
+}

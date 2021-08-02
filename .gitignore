@@ -211,3 +211,15 @@ bookingservImplementation/target/test-classes/com/paypal/bfs/test/bookingserv/co
 bookingservImplementation/target/test-classes/com/paypal/bfs/test/bookingserv/service/impl/BookingResourceServiceTest.class
 bookingservImplementation/target/test-classes/com/paypal/bfs/test/bookingserv/util/FileUtil.class
 bookingservImplementation/target/test-classes/com/paypal/bfs/test/bookingserv/validations/CreateBookingValidationsTest.class
+bookingservImplementation/target/test-classes/testData/BookingAddressMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingCheckinMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingCheckoutMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingCityMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingCountryMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingDepositMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingDOBMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingLine1MissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingLine2MissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingStateMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingTotalPriceMissingRequest.json
+bookingservImplementation/target/test-classes/testData/BookingZipCodeMissingRequest.json

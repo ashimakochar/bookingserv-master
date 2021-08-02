@@ -1,6 +1,6 @@
 package com.paypal.bfs.test.bookingserv.impl;
 
-import com.paypal.bfs.test.bookingserv.Validations.CreateBookingValidations;
+import com.paypal.bfs.test.bookingserv.validations.CreateBookingValidations;
 import com.paypal.bfs.test.bookingserv.api.BookingResource;
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;

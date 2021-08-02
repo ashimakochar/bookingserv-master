@@ -30,20 +30,21 @@ public class CreateBookingValidations {
               Booking.class.getSimpleName()), VALIDATION_EXCEPTION.getCode());
     }
     String nullFieldInBooking = validateBookingFields(booking);
-    String nullFieldInAddressType = validateAddressTypeFields(booking.getAddress());
-    if(Objects.nonNull(nullFieldInBooking)){
+    if (Objects.nonNull(nullFieldInBooking)) {
       throw new ValidationException(
           String.format(VALIDATION_EXCEPTION.getDescription(),
               nullFieldInBooking), VALIDATION_EXCEPTION.getCode());
     }
 
-    if(Objects.nonNull(nullFieldInAddressType)){
+    String nullFieldInAddressType = validateAddressTypeFields(booking.getAddress());
+
+    if (Objects.nonNull(nullFieldInAddressType)) {
       throw new ValidationException(
           String.format(VALIDATION_EXCEPTION.getDescription(),
               nullFieldInAddressType), VALIDATION_EXCEPTION.getCode());
     }
 
-}
+  }
 
   private String validateBookingFields(Booking booking) {
     Map<String, Object> parameters = new HashMap<>();

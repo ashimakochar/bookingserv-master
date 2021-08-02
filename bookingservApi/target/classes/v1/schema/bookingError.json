@@ -3,10 +3,6 @@
   "description": "Booking error object",
   "type": "object",
   "properties": {
-    "api_url": {
-      "description": "api url",
-      "type": "string"
-    },
     "timestamp": {
       "description": "timestamp of the exception",
       "type": "string",
@@ -16,8 +12,16 @@
       "description": "HttpStatus",
       "type": "string"
     },
+    "error": {
+      "description": "error Type",
+      "type": "string"
+    },
     "message": {
       "description": "ErrorMessage",
+      "type": "string"
+    },
+    "path": {
+      "description": "api url",
       "type": "string"
     },
     "errorCode": {

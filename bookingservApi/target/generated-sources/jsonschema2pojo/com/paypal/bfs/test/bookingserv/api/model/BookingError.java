@@ -21,21 +21,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "api_url",
     "timestamp",
     "status",
+    "error",
     "message",
+    "path",
     "errorCode"
 })
 public class BookingError {
 
-    /**
-     * api url
-     * 
-     */
-    @JsonProperty("api_url")
-    @JsonPropertyDescription("api url")
-    private String apiUrl;
     /**
      * timestamp of the exception
      * (Required)
@@ -53,6 +47,13 @@ public class BookingError {
     @JsonPropertyDescription("HttpStatus")
     private String status;
     /**
+     * error Type
+     * 
+     */
+    @JsonProperty("error")
+    @JsonPropertyDescription("error Type")
+    private String error;
+    /**
      * ErrorMessage
      * (Required)
      * 
@@ -60,6 +61,13 @@ public class BookingError {
     @JsonProperty("message")
     @JsonPropertyDescription("ErrorMessage")
     private String message;
+    /**
+     * api url
+     * 
+     */
+    @JsonProperty("path")
+    @JsonPropertyDescription("api url")
+    private String path;
     /**
      * error Code
      * 
@@ -69,24 +77,6 @@ public class BookingError {
     private Object errorCode;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    /**
-     * api url
-     * 
-     */
-    @JsonProperty("api_url")
-    public String getApiUrl() {
-        return apiUrl;
-    }
-
-    /**
-     * api url
-     * 
-     */
-    @JsonProperty("api_url")
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
-    }
 
     /**
      * timestamp of the exception
@@ -129,6 +119,24 @@ public class BookingError {
     }
 
     /**
+     * error Type
+     * 
+     */
+    @JsonProperty("error")
+    public String getError() {
+        return error;
+    }
+
+    /**
+     * error Type
+     * 
+     */
+    @JsonProperty("error")
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    /**
      * ErrorMessage
      * (Required)
      * 
@@ -146,6 +154,24 @@ public class BookingError {
     @JsonProperty("message")
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * api url
+     * 
+     */
+    @JsonProperty("path")
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * api url
+     * 
+     */
+    @JsonProperty("path")
+    public void setPath(String path) {
+        this.path = path;
     }
 
     /**
@@ -180,10 +206,6 @@ public class BookingError {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(BookingError.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("apiUrl");
-        sb.append('=');
-        sb.append(((this.apiUrl == null)?"<null>":this.apiUrl));
-        sb.append(',');
         sb.append("timestamp");
         sb.append('=');
         sb.append(((this.timestamp == null)?"<null>":this.timestamp));
@@ -192,9 +214,17 @@ public class BookingError {
         sb.append('=');
         sb.append(((this.status == null)?"<null>":this.status));
         sb.append(',');
+        sb.append("error");
+        sb.append('=');
+        sb.append(((this.error == null)?"<null>":this.error));
+        sb.append(',');
         sb.append("message");
         sb.append('=');
         sb.append(((this.message == null)?"<null>":this.message));
+        sb.append(',');
+        sb.append("path");
+        sb.append('=');
+        sb.append(((this.path == null)?"<null>":this.path));
         sb.append(',');
         sb.append("errorCode");
         sb.append('=');

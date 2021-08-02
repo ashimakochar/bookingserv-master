@@ -3,7 +3,6 @@ package com.paypal.bfs.test.bookingserv.exceptionHandler;
 import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.TRANSACTION_EXCEPTION;
 import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.VALIDATION_EXCEPTION;
 
-import com.paypal.bfs.test.bookingserv.api.exceptions.NoContentException;
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.BookingError;
 import java.time.LocalDateTime;
@@ -26,12 +25,14 @@ public class GlobalExceptionHandler {
     if (e.getCause() instanceof ConstraintViolationException) {
       return new ResponseEntity<>(
           createBookingError(HttpStatus.BAD_REQUEST, e.getOriginalException().getMessage(),
-              VALIDATION_EXCEPTION.getCode(), req.getRequestURI()),
+              VALIDATION_EXCEPTION.getCode(), req.getRequestURI(),
+              ConstraintViolationException.class.getSimpleName()),
           HttpStatus.BAD_REQUEST);
     }
     return new ResponseEntity<>(
         createBookingError(HttpStatus.BAD_REQUEST, e.getOriginalException().getMessage(),
-            TRANSACTION_EXCEPTION.getCode(), req.getRequestURI()),
+            TRANSACTION_EXCEPTION.getCode(), req.getRequestURI(),
+            e.getCause().getClass().getSimpleName()),
         HttpStatus.BAD_REQUEST);
   }
 
@@ -40,36 +41,29 @@ public class GlobalExceptionHandler {
   protected ResponseEntity<Object> badRequest(HttpServletRequest req,
       ValidationException e) {
     return new ResponseEntity<>(createBookingError(HttpStatus.BAD_REQUEST, e.getMessage(),
-        e.getErrorCode(), req.getRequestURI()),
+        e.getErrorCode(), req.getRequestURI(), ValidationException.class.getSimpleName()),
         HttpStatus.BAD_REQUEST);
   }
 
-  @ResponseStatus(value = HttpStatus.NO_CONTENT)
-  @ExceptionHandler({NoContentException.class})
-  protected ResponseEntity<Object> badRequest(HttpServletRequest req,
-      NoContentException e) {
-    return new ResponseEntity<>(createBookingError(HttpStatus.NO_CONTENT, e.getMessage(),
-        e.getErrorCode(), req.getRequestURI()),
-        HttpStatus.NO_CONTENT);
-  }
 
   @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler({Exception.class})
   protected ResponseEntity<Object> genericException(HttpServletRequest req, Exception e) {
     return new ResponseEntity<>(
         createBookingError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), null,
-            req.getRequestURI()),
+            req.getRequestURI(), e.getCause().getClass().getSimpleName()),
         HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   private BookingError createBookingError(HttpStatus status, String message, Integer errorCode,
-      String apiUrl) {
+      String apiUrl, String error) {
     BookingError bookingError = new BookingError();
     bookingError.setTimestamp(LocalDateTime.now());
     bookingError.setStatus(status.name());
     bookingError.setErrorCode(errorCode);
     bookingError.setMessage(message);
-    bookingError.setApiUrl(apiUrl);
+    bookingError.setPath(apiUrl);
+    bookingError.setError(error);
     return bookingError;
   }
 

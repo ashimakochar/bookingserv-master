@@ -1,12 +1,9 @@
 package com.paypal.bfs.test.bookingserv.impl;
 
-import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.NO_CONTENT_EXCEPTION;
-
 import com.paypal.bfs.test.bookingserv.Validations.CreateBookingValidations;
 import com.paypal.bfs.test.bookingserv.api.BookingResource;
-import com.paypal.bfs.test.bookingserv.api.exceptions.NoContentException;
-import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;
+import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.mapper.BookingResponseMapper;
 import com.paypal.bfs.test.bookingserv.repository.BookingRepository;
 import java.util.ArrayList;
@@ -41,9 +38,9 @@ public class BookingResourceImpl implements BookingResource {
 
   @Override
   @Transactional
-  public ResponseEntity<Booking> create(@RequestHeader("transaction-guid") UUID transactionGuid,
+  public ResponseEntity<Booking> create(@RequestHeader(value = "transaction-guid", required = false) UUID transactionGuid,
       Booking booking) throws ValidationException {
-    createBookingValidations.validate(transactionGuid, booking);
+    createBookingValidations.validate(transactionGuid,booking);
     com.paypal.bfs.test.bookingserv.entity.Booking bookingEntity;
     if (bookingRepository.checkByTransactionGuid(transactionGuid)) {
       bookingEntity = bookingRepository.findByTransactionGuid(transactionGuid);
@@ -61,14 +58,13 @@ public class BookingResourceImpl implements BookingResource {
 
   @Override
   @Transactional
-  public ResponseEntity<List<Booking>> getAll() throws NoContentException {
+  public ResponseEntity<List<Booking>> getAll() {
     List<Booking> bookings = new ArrayList<>();
     Iterable<com.paypal.bfs.test.bookingserv.entity.Booking> bookingList = bookingRepository
         .findAll();
     bookingList.forEach(b -> bookings.add(bookingResponseMapper.mapToBookingResponse(b)));
     if (bookings.size() == 0) {
-      throw new NoContentException(NO_CONTENT_EXCEPTION.getDescription(),
-          NO_CONTENT_EXCEPTION.getCode());
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     return new ResponseEntity<>(bookings, HttpStatus.OK);
   }

@@ -5,8 +5,7 @@ import lombok.Getter;
 public enum ExceptionDetails {
 
   VALIDATION_EXCEPTION("Request entered is not Valid , %s is null", 407),
-  TRANSACTION_EXCEPTION("Transaction could not succeed", 408),
-  NO_CONTENT_EXCEPTION("No bookings found in Database",409);
+  TRANSACTION_EXCEPTION("Transaction could not succeed", 408);
 
   @Getter
   private final String description;

@@ -15,15 +15,12 @@ public class BookingResourceServiceImpl implements BookingResourceService {
 
   private BookingRepository bookingRepository;
 
-  private BookingResponseMapper bookingResponseMapper;
 
 
   @Autowired
   public BookingResourceServiceImpl(
-      BookingRepository bookingRepository,
-      BookingResponseMapper bookingResponseMapper) {
+      BookingRepository bookingRepository) {
     this.bookingRepository = bookingRepository;
-    this.bookingResponseMapper = bookingResponseMapper;
   }
 
   @Override
@@ -32,12 +29,12 @@ public class BookingResourceServiceImpl implements BookingResourceService {
     if (bookingRepository.checkByTransactionGuid(transactionGuid)) {
       bookingEntity = bookingRepository.findByTransactionGuid(transactionGuid);
     } else {
-      com.paypal.bfs.test.bookingserv.entity.Booking bookingRequestEntity = bookingResponseMapper
+      com.paypal.bfs.test.bookingserv.entity.Booking bookingRequestEntity = BookingResponseMapper
           .mapToBookingEntity(booking, transactionGuid);
       bookingEntity = bookingRepository
           .save(bookingRequestEntity);
     }
-    Booking bookingResponse = bookingResponseMapper.mapToBookingResponse(bookingEntity);
+    Booking bookingResponse = BookingResponseMapper.mapToBookingResponse(bookingEntity);
     return bookingResponse;
   }
 
@@ -46,7 +43,7 @@ public class BookingResourceServiceImpl implements BookingResourceService {
     List<Booking> bookings = new ArrayList<>();
     Iterable<com.paypal.bfs.test.bookingserv.entity.Booking> bookingList = bookingRepository
         .findAll();
-    bookingList.forEach(b -> bookings.add(bookingResponseMapper.mapToBookingResponse(b)));
+    bookingList.forEach(b -> bookings.add(BookingResponseMapper.mapToBookingResponse(b)));
     return bookings;
   }
 }

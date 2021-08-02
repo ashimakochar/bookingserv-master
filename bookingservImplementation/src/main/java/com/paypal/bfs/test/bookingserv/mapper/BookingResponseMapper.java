@@ -1,15 +1,13 @@
 package com.paypal.bfs.test.bookingserv.mapper;
 
-import com.paypal.bfs.test.bookingserv.entity.Address;
 import com.paypal.bfs.test.bookingserv.api.model.AddressType;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;
+import com.paypal.bfs.test.bookingserv.entity.Address;
 import java.util.UUID;
-import org.springframework.stereotype.Component;
 
-@Component
 public class BookingResponseMapper {
 
-  public Booking mapToBookingResponse(com.paypal.bfs.test.bookingserv.entity.Booking booking) {
+  public static Booking mapToBookingResponse(com.paypal.bfs.test.bookingserv.entity.Booking booking) {
     Booking bookingResponse = new Booking();
     bookingResponse.setId(booking.getBookingId());
     bookingResponse.setFirstName(booking.getFirstName());
@@ -23,7 +21,7 @@ public class BookingResponseMapper {
     return bookingResponse;
   }
 
-  public com.paypal.bfs.test.bookingserv.entity.Booking mapToBookingEntity(Booking booking,
+  public static com.paypal.bfs.test.bookingserv.entity.Booking mapToBookingEntity(Booking booking,
       UUID transactionGuid) {
     com.paypal.bfs.test.bookingserv.entity.Booking bookingResponseEntity = com.paypal.bfs.test.bookingserv.entity.Booking
         .builder().bookingId(booking.getId()).firstName(booking.getFirstName())
@@ -35,7 +33,7 @@ public class BookingResponseMapper {
     return bookingResponseEntity;
   }
 
-  private AddressType mapToAddressType(Address address) {
+  private static AddressType mapToAddressType(Address address) {
     AddressType addressType = new AddressType();
     addressType.setLine1(address.getLine1());
     addressType.setLine2(address.getLine2());
@@ -46,7 +44,7 @@ public class BookingResponseMapper {
     return addressType;
   }
 
-  private Address mapToAddressEntity(AddressType addressType, Integer userId) {
+  private static Address mapToAddressEntity(AddressType addressType, Integer userId) {
     Address address = Address.builder().line1(addressType.getLine1())
         .line2(addressType.getLine2())
         .city(addressType.getCity()).state(addressType.getState()).country(addressType.getCountry())

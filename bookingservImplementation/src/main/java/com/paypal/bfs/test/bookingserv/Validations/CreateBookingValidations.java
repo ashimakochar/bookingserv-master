@@ -1,4 +1,4 @@
-package com.paypal.bfs.test.bookingserv.Validations;
+package com.paypal.bfs.test.bookingserv.validations;
 
 import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.VALIDATION_EXCEPTION;
 
@@ -27,7 +27,7 @@ public class CreateBookingValidations {
     if (Objects.isNull(booking)) {
       throw new ValidationException(
           String.format(VALIDATION_EXCEPTION.getDescription(),
-              Booking.class.toGenericString()), VALIDATION_EXCEPTION.getCode());
+              Booking.class.getSimpleName()), VALIDATION_EXCEPTION.getCode());
     }
     String nullFieldInBooking = validateBookingFields(booking);
     String nullFieldInAddressType = validateAddressTypeFields(booking.getAddress());

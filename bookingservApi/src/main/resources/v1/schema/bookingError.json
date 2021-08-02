@@ -1,0 +1,34 @@
+{
+  "title": "Booking error",
+  "description": "Booking error object",
+  "type": "object",
+  "properties": {
+    "api_url": {
+      "description": "api url",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "timestamp of the exception",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "HttpStatus",
+      "type": "string"
+    },
+    "message": {
+      "description": "ErrorMessage",
+      "type": "string"
+    },
+    "errorCode": {
+      "description": "error Code",
+      "type": "int"
+    }
+  },
+  "required": [
+    "timestamp",
+    "status",
+    "message",
+    "detailMessage"
+  ]
+}

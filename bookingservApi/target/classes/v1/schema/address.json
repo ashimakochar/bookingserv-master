@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Address dataType",
+  "definitions": {
+    "addressType": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "description": "line 1 of Address",
+          "type": "string"
+        },
+        "line2": {
+          "description": "line 2 of Address",
+          "type": "string"
+        },
+        "city": {
+          "description": "City in Address",
+          "type": "string"
+        },
+        "state": {
+          "description": "state in Address",
+          "type": "string"
+        },
+        "country": {
+          "description": "country in Address",
+          "type": "string"
+        },
+        "zip_code": {
+          "description": "zip code in ddress",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "line1",
+        "city",
+        "state",
+        "country",
+        "zip_code"
+      ]
+    }
+  }
+}

@@ -3,7 +3,9 @@ package com.paypal.bfs.test.bookingserv.constant;
 public class TestConstants {
 
   public static final String BOOKING_COMPLETE_REQUEST = "/testdata/BookingCompleteRequest.json";
+  public static final String BOOKING_COMPLETE_RESPONSE = "/testdata/BookingCompleteResponse.json";
   public static final String BOOKING_ENTITY_COMPLETE_REQUEST = "/testdata/BookingEntityCompleteRequest.json";
+  public static final String BOOKING_ENTITY_COMPLETE_RESPONSE = "/testdata/BookingEntityCompleteResponse.json";
   public static final String BOOKING_GET_ALL_RESPONSE = "/testdata/BookingGetAllResponse.json";
   public static final String BOOKING_FIRST_NAME_MISSING_REQUEST = "/testdata/BookingFirstNameMissingRequest.json";
   public static final String BOOKING_LAST_NAME_MISSING_REQUEST = "/testdata/BookingLastNameMissingRequest.json";

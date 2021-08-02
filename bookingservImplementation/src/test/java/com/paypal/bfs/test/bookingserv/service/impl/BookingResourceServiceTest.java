@@ -42,7 +42,7 @@ public class BookingResourceServiceTest {
     booking = (Booking) FileUtil
         .getObjectFromFile(TestConstants.BOOKING_COMPLETE_REQUEST, Booking.class);
     bookingEntity = (com.paypal.bfs.test.bookingserv.entity.Booking)FileUtil
-        .getObjectFromFile(TestConstants.BOOKING_ENTITY_COMPLETE_REQUEST, com.paypal.bfs.test.bookingserv.entity.Booking.class);
+        .getObjectFromFile(TestConstants.BOOKING_ENTITY_COMPLETE_RESPONSE, com.paypal.bfs.test.bookingserv.entity.Booking.class);
   }
 
 

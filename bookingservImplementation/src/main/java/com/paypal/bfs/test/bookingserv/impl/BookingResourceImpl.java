@@ -2,67 +2,47 @@ package com.paypal.bfs.test.bookingserv.impl;
 
 import com.paypal.bfs.test.bookingserv.Validations.CreateBookingValidations;
 import com.paypal.bfs.test.bookingserv.api.BookingResource;
-import com.paypal.bfs.test.bookingserv.api.model.Booking;
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
-import com.paypal.bfs.test.bookingserv.mapper.BookingResponseMapper;
-import com.paypal.bfs.test.bookingserv.repository.BookingRepository;
-import java.util.ArrayList;
+import com.paypal.bfs.test.bookingserv.api.model.Booking;
+import com.paypal.bfs.test.bookingserv.service.BookingResourceService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BookingResourceImpl implements BookingResource {
 
-  private BookingRepository bookingRepository;
-
-  private BookingResponseMapper bookingResponseMapper;
 
   private CreateBookingValidations createBookingValidations;
 
+  private BookingResourceService bookingResourceService;
+
   @Autowired
   public BookingResourceImpl(
-      BookingRepository bookingRepository,
-      BookingResponseMapper bookingResponseMapper,
-      CreateBookingValidations createBookingValidations) {
-    this.bookingRepository = bookingRepository;
-    this.bookingResponseMapper = bookingResponseMapper;
+      CreateBookingValidations createBookingValidations,
+      BookingResourceService bookingResourceService) {
     this.createBookingValidations = createBookingValidations;
+    this.bookingResourceService = bookingResourceService;
   }
 
 
   @Override
-  @Transactional
-  public ResponseEntity<Booking> create(@RequestHeader(value = "transaction-guid", required = false) UUID transactionGuid,
+  public ResponseEntity<Booking> create(
+      @RequestHeader(value = "transaction-guid", required = false) UUID transactionGuid,
       Booking booking) throws ValidationException {
-    createBookingValidations.validate(transactionGuid,booking);
-    com.paypal.bfs.test.bookingserv.entity.Booking bookingEntity;
-    if (bookingRepository.checkByTransactionGuid(transactionGuid)) {
-      bookingEntity = bookingRepository.findByTransactionGuid(transactionGuid);
-    } else {
-      bookingEntity = bookingResponseMapper
-          .mapToBookingEntity(booking, transactionGuid);
-    }
-
-    com.paypal.bfs.test.bookingserv.entity.Booking bookingResponseEntity = bookingRepository
-        .save(bookingEntity);
-
-    Booking bookingResponse = bookingResponseMapper.mapToBookingResponse(bookingResponseEntity);
+    createBookingValidations.validate(transactionGuid, booking);
+    Booking bookingResponse = bookingResourceService
+        .createBooking(transactionGuid, booking);
     return new ResponseEntity<>(bookingResponse, HttpStatus.CREATED);
   }
 
   @Override
-  @Transactional
   public ResponseEntity<List<Booking>> getAll() {
-    List<Booking> bookings = new ArrayList<>();
-    Iterable<com.paypal.bfs.test.bookingserv.entity.Booking> bookingList = bookingRepository
-        .findAll();
-    bookingList.forEach(b -> bookings.add(bookingResponseMapper.mapToBookingResponse(b)));
+    List<Booking> bookings = bookingResourceService.getAllBookings();
     if (bookings.size() == 0) {
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -143,3 +143,8 @@ bookingservImplementation/target/classes/com/paypal/bfs/test/bookingserv/Validat
 bookingservImplementation/target/maven-archiver/pom.properties
 bookingservImplementation/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 bookingservImplementation/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+bookingservImplementation/target/classes/com/paypal/bfs/test/bookingserv/service/BookingResourceService.class
+bookingservImplementation/target/classes/com/paypal/bfs/test/bookingserv/service/impl/BookingResourceServiceImpl.class
+bookingservApi/bookingservApi.iml
+bookingservFunctionalTests/bookingservFunctionalTests.iml
+bookingservImplementation/bookingservImplementation.iml

@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;
 import com.paypal.bfs.test.bookingserv.constant.TestConstants;
-import com.paypal.bfs.test.bookingserv.constants.ExceptionDetails;
+import com.paypal.bfs.test.bookingserv.enums.ExceptionDetails;
 import com.paypal.bfs.test.bookingserv.exceptionHandler.GlobalExceptionHandler;
 import com.paypal.bfs.test.bookingserv.service.impl.BookingResourceServiceImpl;
 import com.paypal.bfs.test.bookingserv.util.FileUtil;

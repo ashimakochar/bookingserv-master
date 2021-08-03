@@ -5,7 +5,7 @@ import com.paypal.bfs.test.bookingserv.api.model.AddressType;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;
 import com.paypal.bfs.test.bookingserv.constants.Constants;
 import com.paypal.bfs.test.bookingserv.util.GenericUtility;
-import com.paypal.bfs.test.bookingserv.constants.ExceptionDetails;
+import com.paypal.bfs.test.bookingserv.enums.ExceptionDetails;
 import de.cronn.reflection.util.PropertyUtils;
 import java.util.HashMap;
 import java.util.Map;

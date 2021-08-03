@@ -1,4 +1,4 @@
-package com.paypal.bfs.test.bookingserv.constants;
+package com.paypal.bfs.test.bookingserv.enums;
 
 import lombok.Getter;
 

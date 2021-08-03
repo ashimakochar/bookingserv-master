@@ -1,6 +1,6 @@
 package com.paypal.bfs.test.bookingserv.exceptionHandler;
 
-import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.TRANSACTION_EXCEPTION;
+import static com.paypal.bfs.test.bookingserv.enums.ExceptionDetails.TRANSACTION_EXCEPTION;
 
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.BookingError;

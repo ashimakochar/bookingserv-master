@@ -1,12 +1,11 @@
 package com.paypal.bfs.test.bookingserv.validations;
 
-import static com.paypal.bfs.test.bookingserv.constants.ExceptionDetails.VALIDATION_EXCEPTION;
-
 import com.paypal.bfs.test.bookingserv.api.exceptions.ValidationException;
 import com.paypal.bfs.test.bookingserv.api.model.AddressType;
 import com.paypal.bfs.test.bookingserv.api.model.Booking;
 import com.paypal.bfs.test.bookingserv.constants.Constants;
 import com.paypal.bfs.test.bookingserv.util.GenericUtility;
+import com.paypal.bfs.test.bookingserv.constants.ExceptionDetails;
 import de.cronn.reflection.util.PropertyUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,27 +20,27 @@ public class CreateBookingValidations {
       throws ValidationException {
     if (Objects.isNull(transactionGuid)) {
       throw new ValidationException(
-          String.format(VALIDATION_EXCEPTION.getDescription(),
-              Constants.TRANSACTION_GUID), VALIDATION_EXCEPTION.getCode());
+          String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(),
+              Constants.TRANSACTION_GUID), ExceptionDetails.VALIDATION_EXCEPTION.getCode());
     }
     if (Objects.isNull(booking)) {
       throw new ValidationException(
-          String.format(VALIDATION_EXCEPTION.getDescription(),
-              Booking.class.getSimpleName()), VALIDATION_EXCEPTION.getCode());
+          String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(),
+              Booking.class.getSimpleName()), ExceptionDetails.VALIDATION_EXCEPTION.getCode());
     }
     String nullFieldInBooking = validateBookingFields(booking);
     if (Objects.nonNull(nullFieldInBooking)) {
       throw new ValidationException(
-          String.format(VALIDATION_EXCEPTION.getDescription(),
-              nullFieldInBooking), VALIDATION_EXCEPTION.getCode());
+          String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(),
+              nullFieldInBooking), ExceptionDetails.VALIDATION_EXCEPTION.getCode());
     }
 
     String nullFieldInAddressType = validateAddressTypeFields(booking.getAddress());
 
     if (Objects.nonNull(nullFieldInAddressType)) {
       throw new ValidationException(
-          String.format(VALIDATION_EXCEPTION.getDescription(),
-              nullFieldInAddressType), VALIDATION_EXCEPTION.getCode());
+          String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(),
+              nullFieldInAddressType), ExceptionDetails.VALIDATION_EXCEPTION.getCode());
     }
 
   }

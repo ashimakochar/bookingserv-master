@@ -1,0 +1,20 @@
+{
+  "bookingId": 1,
+  "transactionGuid": "123e4567-e89b-12d3-a456-426614174099",
+  "firstName":"Bob",
+  "lastName" : "Dylan",
+  "dateOfBirth" : "2021-09-21",
+  "checkin":"2021-09-19T16:37:15",
+  "checkout": "2021-09-20T16:37:15",
+  "totalPrice" : 200.0,
+  "deposit" : 0.0,
+  "addressId": 1,
+  "address" :{
+    "id": 1,
+    "line1": "23 A",
+    "city" : "Rohtak",
+    "state" : "Haryana",
+    "country" : "India",
+    "zipCode" : 12345
+  }
+}

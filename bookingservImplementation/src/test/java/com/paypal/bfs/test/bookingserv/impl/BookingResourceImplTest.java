@@ -34,11 +34,6 @@ import org.springframework.transaction.TransactionSystemException;
 @WebMvcTest(BookingResourceImpl.class)
 public class BookingResourceImplTest {
 
-  private static final String CREATE_BOOKING = "/v1/bfs/booking";
-
-  private static final String GET_ALL_BOOKING = "/v1/bfs/bookings";
-
-  private static final String TRANSACTION_UUID = "transaction-guid";
   @InjectMocks
   BookingResourceImpl bookingResource;
 
@@ -74,9 +69,9 @@ public class BookingResourceImplTest {
         .when(bookingResourceService).createBooking(Mockito.any(UUID.class), Mockito.any(
         Booking.class));
     mockMvc.perform(
-        post(CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        post(TestConstants.CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .header(
-                TRANSACTION_UUID, UUID.randomUUID())
+                TestConstants.TRANSACTION_UUID, UUID.randomUUID())
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(FileUtil
             .getContentsOfFile(TestConstants.BOOKING_COMPLETE_REQUEST))).andExpect(
         jsonPath("$.id").exists())
@@ -100,14 +95,14 @@ public class BookingResourceImplTest {
   @Test
   public void createTestValidationExceptionFailureCase() throws Exception {
     Mockito.doThrow(new ValidationException(
-        String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(), TRANSACTION_UUID),
+        String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(), TestConstants.TRANSACTION_UUID),
         ExceptionDetails.VALIDATION_EXCEPTION.getCode())).when(createBookingValidations)
         .validate(Mockito.any(UUID.class), Mockito.any(
             Booking.class));
     mockMvc.perform(
-        post(CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        post(TestConstants.CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .header(
-                TRANSACTION_UUID, UUID.randomUUID())
+                TestConstants.TRANSACTION_UUID, UUID.randomUUID())
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(FileUtil
             .getContentsOfFile(TestConstants.BOOKING_COMPLETE_REQUEST)))
         .andExpect(status().isBadRequest());
@@ -116,14 +111,14 @@ public class BookingResourceImplTest {
   @Test
   public void createTestTransactionExceptionFailureCase() throws Exception {
     Mockito.doThrow(new TransactionSystemException(
-        String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(), TRANSACTION_UUID),
+        String.format(ExceptionDetails.VALIDATION_EXCEPTION.getDescription(), TestConstants.TRANSACTION_UUID),
         new ConstraintViolationException(null))).when(createBookingValidations)
         .validate(Mockito.any(UUID.class), Mockito.any(
             Booking.class));
     mockMvc.perform(
-        post(CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        post(TestConstants.CREATE_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .header(
-                TRANSACTION_UUID, UUID.randomUUID())
+                TestConstants.TRANSACTION_UUID, UUID.randomUUID())
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(FileUtil
             .getContentsOfFile(TestConstants.BOOKING_COMPLETE_REQUEST)))
         .andExpect(status().isBadRequest());
@@ -134,7 +129,7 @@ public class BookingResourceImplTest {
     Mockito.doReturn(bookingList).when(bookingResourceService)
         .getAllBookings();
     mockMvc.perform(
-        get(GET_ALL_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        get(TestConstants.GET_ALL_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(FileUtil
             .getContentsOfFile(TestConstants.BOOKING_GET_ALL_RESPONSE)))
         .andExpect(status().isOk());
@@ -145,7 +140,7 @@ public class BookingResourceImplTest {
     Mockito.doReturn(new ArrayList<Booking>()).when(bookingResourceService)
         .getAllBookings();
     mockMvc.perform(
-        get(GET_ALL_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+        get(TestConstants.GET_ALL_BOOKING).accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(FileUtil
             .getContentsOfFile(TestConstants.BOOKING_GET_ALL_RESPONSE)))
         .andExpect(status().isNoContent());

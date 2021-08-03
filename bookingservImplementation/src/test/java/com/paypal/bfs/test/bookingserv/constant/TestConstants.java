@@ -21,6 +21,8 @@ public class TestConstants {
   public static final String BOOKING_STATE_MISSING_REQUEST = "/testdata/BookingStateMissingRequest.json";
   public static final String BOOKING_COUNTRY_MISSING_REQUEST = "/testdata/BookingCountryMissingRequest.json";
   public static final String BOOKING_ZIP_CODE_MISSING_REQUEST = "/testdata/BookingZipCodeMissingRequest.json";
-
+  public static final String CREATE_BOOKING = "/v1/bfs/booking";
+  public static final String GET_ALL_BOOKING = "/v1/bfs/bookings";
+  public static final String TRANSACTION_UUID = "transaction-guid";
 
 }
